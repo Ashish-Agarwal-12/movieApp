@@ -1,17 +1,26 @@
-import React, { useContext, useRef } from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import {  Button } from "react-bootstrap";
 import { HallContext } from "../context/HallContext";
+import {useNavigate} from "react-router-dom";
 
-const HallForm = ({ onClose, onSubmit }) => {
+const HallForm = ({ onClose }) => {
 
     const { setHall } = useContext(HallContext);
-    const addressRef = useRef();
-    const hallNameRef = useRef();
-    const capacityRef = useRef();
+    const navigate = useNavigate();
+    const [hallName, sethallName] = useState();
+    const [address, setAddress] = useState();
+    const [totalCapacity, setTotalCapacity] = useState();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        onSubmit();
+        let body = {
+            address: address,
+            hallName: hallName,
+            totalCapacity: totalCapacity
+        }
+        setHall(body);
+        window.location.reload(true);
+        // navigate("/");
     }
 
     return (
@@ -20,24 +29,17 @@ const HallForm = ({ onClose, onSubmit }) => {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="forHallName" className="form-label">Hall Name</label>
-                        <input type="text" className="form-control" id="forHallName" />
+                        <input type="text" className="form-control" id="forHallName"  onChange={(e) => {sethallName(e.target.value)}}/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="forHallAddress" className="form-label">Hall Address</label>
-                        <input type="text" className="form-control" id="forHallAddress" />
+                        <input type="text" className="form-control" id="forHallAddress" onChange={(e) => {setAddress(e.target.value)}}/>
                     </div>
                     <div className="mb-3">
                         <label className="form-label" htmlFor="forTotalCapacity">Capacity</label>
-                        <input type="number" className="form-control" id="forTotalCapacity" />
-
+                        <input type="number" className="form-control" id="forTotalCapacity"  onChange={(e) => {setTotalCapacity(e.target.value)}}/>
                     </div>
-                    <Button variant="primary" type="submit" style={{ borderRadius: '8px' }} onClick={() => {
-                        setHall({
-                            address: addressRef.current.value,
-                            hallName: hallNameRef.current.value,
-                            totalCapacity: capacityRef.current.value
-                        })
-                    }}>Submit</Button>
+                    <button className="btn btn-primary" type="submit" style={{ borderRadius: '8px' }}>Submit</button>
                     <Button variant="secondary" onClick={onClose} style={{ borderRadius: '8px' }}>Cancel</Button>
                 </form>
             </div>
@@ -45,5 +47,4 @@ const HallForm = ({ onClose, onSubmit }) => {
         </div>
     );
 }
-
 export default HallForm;

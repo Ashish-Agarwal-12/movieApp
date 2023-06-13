@@ -5,7 +5,7 @@ import { HallContext } from "../context/HallContext";
 import HallForm from "./HallForm";
 
 export default function HallList() {
-    const { halls } = useContext(HallContext);
+    const { halls, setHallId } = useContext(HallContext);
 
     const [showForm, setShowForm] = useState(false);
 
@@ -22,17 +22,25 @@ export default function HallList() {
         closeForm();
     }
 
+    const handleDelete = (id) => {
+        if(window.confirm("Are you sure you want to delete this data?")) {
+            console.log("Calling delete function")
+            setHallId(id);
+            
+        }
+    }
+
     const rows =halls.map((hall) => {
         return (
             <tr key={hall.hallId}>
-                <td>{hall.hallId}</td>
+                <td>{halls.indexOf(hall) + 1}</td>
                 <td>{hall.hallName}</td>
                 <td>{hall.address}</td>
                 <td>{hall.totalCapacity}</td>
                 <td>
                     <div className="btn-group gap-4" role="group">
                         <button type="button" className="btn btn-primary" style={{ borderRadius: "4px" }}>Edit</button>
-                        <button type="button" className="btn btn-danger" style={{ borderRadius: "4px" }}>Delete</button>
+                        <button type="button" className="btn btn-danger" style={{ borderRadius: "4px" }} onClick={() => {handleDelete(hall.hallId)}}>Delete</button>
                     </div>
                 </td>
             </tr>
