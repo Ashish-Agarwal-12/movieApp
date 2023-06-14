@@ -47,9 +47,8 @@ export const HallContextProvider = ({ children }) => {
 
     const deleteHall = async (url, id) => {
         await axios.delete(url+`${id}`).then((response) => {
-            
             console.log(response);
-            navigate("/hallList");
+            // navigate("/hallList");
         });
     }
     useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import '../App.css';
-import { HallContext } from "../context/HallContext";
+import '../../App.css';
+import { HallContext } from "../../context/HallContext";
 import HallForm from "./HallForm";
 
 export default function HallList() {

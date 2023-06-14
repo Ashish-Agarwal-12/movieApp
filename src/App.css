@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,9 +35,22 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 .btn {
   border-radius: 2px;
+}
+
+.modal-container {
+  padding-left: 25%;
+  padding-right: 25%;
+  width: 100%;
+  border-radius: 5px;
+  position: absolute;
+  align-content: center;
+}
+
+label {
+  position:sticky
 }
 

@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import {  Button } from "react-bootstrap";
-import { HallContext } from "../context/HallContext";
-import {useNavigate} from "react-router-dom";
+import { HallContext } from "../../context/HallContext";
+// import {useNavigate} from "react-router-dom";
 
 const HallForm = ({ onClose }) => {
 
     const { setHall } = useContext(HallContext);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [hallName, sethallName] = useState();
     const [address, setAddress] = useState();
     const [totalCapacity, setTotalCapacity] = useState();

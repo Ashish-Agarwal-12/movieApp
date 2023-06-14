@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export const SlotContext = React.createContext();
 
-const getAllSlotsUrl = "https://localhost:8080/getAllSlots";
+const getAllSlotsUrl = "http://localhost:8080/getAllSlots";
 const deleteSlotUrl = "http://localhost:8080/deleteSlot/";
 
 export const SlotContextProvider = ({ children }) => {

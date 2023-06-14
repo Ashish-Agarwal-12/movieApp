@@ -23,6 +23,9 @@ function NavBar() {
                         <LinkContainer to="/Movies">
                             <Nav.Link>Movies</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/users">
+                            <Nav.Link>Users</Nav.Link>
+                        </LinkContainer>
                     </Nav>
                     <Nav>
                         <Nav.Link href="#deets">More deets</Nav.Link>
