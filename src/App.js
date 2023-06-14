@@ -8,6 +8,7 @@ import Home from "./components/Home"
 import SlotList from "./components/SlotList"
 import UserList from './components/UserComponents/UserList';
 import { HallContextProvider } from './context/HallContext';
+import UserUpdate from './components/UserComponents/UserUpdate';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/slotList" element={<SlotList />} />
           <Route path="/movies" element={<MovieList />} />
           <Route path="/users" element={<UserList />} />
+          <Route path="/userUpdate" element={<UserUpdate />} />
         </Routes>
       </Layout>
       </HallContextProvider>

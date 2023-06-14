@@ -1,0 +1,13 @@
+.homepage {
+    background-color: black;
+    align-items: center;
+    padding: 100 px;
+    height: 95vh;
+}
+
+.movie-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    height: 450px;
+}

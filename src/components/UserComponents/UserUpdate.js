@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import UserService from "../../services/UserService";
 
-const UserUpdate = (id, body) => {
+const UserUpdate = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
@@ -22,7 +22,7 @@ const UserUpdate = (id, body) => {
     };
 
     // Call the update method from the Axios service
-    UserService.updateUserById(id, updatedData)
+    UserService.updateUserById(props.id, updatedData)
       .then((response) => {
         console.log("Update successful");
         // Additional actions after successful update
@@ -60,7 +60,7 @@ const UserUpdate = (id, body) => {
             <Form.Control
               type="text"
               name="userName"
-              value={body.userName}
+              value={props.body.userName}
               placeholder="Enter the UserName"
               onChange={(e) => setUserName(e.target.value)}
             />
@@ -70,7 +70,7 @@ const UserUpdate = (id, body) => {
             <Form.Control
               type="text"
               name="password"
-              value={body.password}
+              value={props.body.password}
               placeholder="Enter the Password"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -80,7 +80,7 @@ const UserUpdate = (id, body) => {
             <Form.Control
               type="email"
               name="emailId"
-              value={body.emailId}
+              value={props.body.emailId}
               placeholder="Enter the Email Id"
               onChange={(e) => setEmailId(e.target.value)}
             />
@@ -90,7 +90,7 @@ const UserUpdate = (id, body) => {
             <Form.Control
               type="text"
               name="userType"
-              value={body.userType}
+              value={props.body.userType}
               placeholder="Enter either user/admin"
               onChange={(e) => setUserType(e.target.value)}
             />
@@ -100,7 +100,7 @@ const UserUpdate = (id, body) => {
             <Form.Control
               type="text"
               name="mobileNumber"
-              value={body.mobileNumber}
+              value={props.body.mobileNumber}
               placeholder="Enter either user/admin"
               onChange={(e) => setMobileNumber(e.target.value)}
             />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import UserService from "../../services/UserService";
 import UserForm from "./UserForm";
 import UserUpdate from "./UserUpdate";
@@ -49,7 +50,10 @@ export default function UserList() {
               type="button"
               className="btn btn-primary"
               style={{ borderRadius: "4px" }}
-              onClick={() => handleUpdate(user.userId,user)}
+              onClick={() => {
+                <Link to="/userUpdate" />
+                handleUpdate(user.userId,user);
+              }}
             >
               Edit
             </button>
@@ -83,6 +87,8 @@ export default function UserList() {
       isActive = false;
     };
   }, []);
+
+  
 
   return (
     <div>
