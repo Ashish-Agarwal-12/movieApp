@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import UserService from "../../services/UserService";
+import UserService from "../services/UserService";
 import UserForm from "./UserForm";
 import UserUpdate from "./UserUpdate";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+// import ToastContainer, { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
@@ -27,12 +32,11 @@ export default function UserList() {
 
   const handleDeleteUser = (id) => {
     if (window.confirm("Are you sure you want to delete this data?")) {
-      
       UserService.deleteUser(id)
         .then((response) => console.log("Delete Successful"))
         .catch((error) => console.log(error));
     }
-    window.location.reload(true);
+    toast.success("Deleted Successfully");
   };
 
   const rows = users.map((user) => {
@@ -45,7 +49,7 @@ export default function UserList() {
         <td>{user.mobileNumber}</td>
         <td>{user.userType}</td>
         <td>
-          <div className="btn-group gap-4" role="group">
+          <div className="btn-group gap-4" role="group"> 
             <button
               type="button"
               className="btn btn-primary"
@@ -86,15 +90,16 @@ export default function UserList() {
     return () => {
       isActive = false;
     };
-  }, []);
+  }, [users]);
 
   
 
   return (
-    <div>
-      <h1>User List</h1>
-      <Table striped bordered hover size="sm">
-        <thead>
+    <Container>
+      <h1 className="py-4">User List</h1>
+      
+      <Table striped>
+        <thead style={{fontWeight:"bold"}}>
           <tr>
             <td>User ID</td>
             <td>User Name</td>
@@ -120,6 +125,8 @@ export default function UserList() {
           <UserForm onClose={closeForm} onSubmit={handleSubmit} />
         </div>
       )}
-    </div>
+      <ToastContainer />
+    </Container>
+
   );
 }

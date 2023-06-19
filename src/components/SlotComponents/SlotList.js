@@ -1,56 +1,66 @@
-import React, { useContext } from "react";
-import {  Table } from "react-bootstrap";
-import '../App.css';
-import { SlotContext } from "../context/SlotContext";
+import React, { useEffect, useState } from "react";
+import SlotService from "../services/SlotService";
+import { Button, Container, Table } from "react-bootstrap";
+import { toast } from "react-toastify";
 
-export default function slotList() {
-    const { slots, setSlotId } = useContext(SlotContext);
+function SlotList() {
+  const [slots, setSlots] = useState([]);
 
-    const handleDelete = (id) => {
-        if(window.confirm("Are you sure you want to delete this data?")) {
-            console.log("Calling delete function")
-            setSlotId(id);
-        }
-    }
+  const fetchData = async () => {
+    // const respone = await fetch("http://localhost:8080/getAllSlots");
+    // const data = await respone.json();
+    // setSlots(data);
+    // console.log(data);
+    SlotService.getAllSlots()
+      .then((response) => setSlots(response.data))
+      .catch((error) => console.log(error));
+  };
 
-    const rows =slots.map((slot) => {
-        return (
-            <tr key={slot.slotId}>
-                <td>{slots.indexOf(slot) + 1}</td>
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
+  return (
+    <Container>
+      <Table className="text-center striped hover">
+        <thead>
+          <tr>
+            <td>Slot Number</td>
+            <td>Hall Name</td>
+            <td>Start Time</td>
+            <td>Slot Date</td>
+            <td>Total Capacity</td>
+            <td>Amount</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          {slots.map((slot) => {
+            return (
+              <tr key={slot.slotId}>
+                <td>{slot.slotId}</td>
                 <td>{slot.hall.hallName}</td>
-                <td>{slot.hall.address}</td>
                 <td>{slot.startTime}</td>
                 <td>{slot.slotDate}</td>
-                <td>{slot.duration}</td>
                 <td>{slot.capacity}</td>
                 <td>{slot.amount}</td>
                 <td>
-                    <div className="btn-group gap-4" role="group">
-                        <button type="button" className="btn btn-primary" style={{ borderRadius: "4px" }}>Edit</button>
-                        <button type="button" className="btn btn-danger" style={{ borderRadius: "4px" }} onClick={() => {handleDelete(slot.slotId)}}>Delete</button>
-                    </div>
+                  <div className="btn-group gap-4" role="group">
+                    <Button variant="primary" style={{ borderRadius: "4px" }}>
+                      Update
+                    </Button>
+                    <Button variant="danger" style={{ borderRadius: "4px" }}>
+                      Delete
+                    </Button>
+                  </div>
                 </td>
-            </tr>
-        );
-    })
-    return (
-        <div>
-            <h1>Slot List</h1>
-            <Table striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                        <td>Slot ID</td>
-                        <td>Hall Name</td>
-                        <td>Hall Address</td>
-                        <td>startTime</td>
-                        <td>Date </td>
-                        <td>Duration </td>
-                        <td>Capacity</td>
-                        <td>Amount</td>
-                    </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </Table>
-        </div>
-    );
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </Container>
+  );
 }
+
+export default SlotList;

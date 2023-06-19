@@ -54,28 +54,6 @@ const Home = () => {
             image: "https://tse4.mm.bing.net/th/id/OIP.7jqBjbrnEZ4V29qIYzHOiQHaLl?w=196&h=307&c=7&r=0&o=5&pid=1.7",
             description: "Description of movie 10"
         },
-        {
-            title: "Looper",
-            image: "https://tse4.mm.bing.net/th/id/OIP.toWFk1D9kZFYmSk95exH1AHaKX?w=196&h=274&c=7&r=0&o=5&pid=1.7",
-            description: "Description of movie 07"
-        },
-        {
-            title: "Suzume",
-            image: "https://tse1.mm.bing.net/th/id/OIP.a81FhYomT7syQ9xv3JmSmAHaLH?w=115&h=180&c=7&r=0&o=5&pid=1.7",
-            description: "Description of movie 08"
-        },
-        {
-            title: "Vampire Diaries",
-            image: "https://tse4.mm.bing.net/th/id/OIP.gfJlrSjGVwWqJxWZxTLJ2QHaK5?w=196&h=288&c=7&r=0&o=5&pid=1.7",
-            description: "Description of movie 09"
-        },
-        {
-            title: "Interstellar",
-            image: "https://tse4.mm.bing.net/th/id/OIP.7jqBjbrnEZ4V29qIYzHOiQHaLl?w=196&h=307&c=7&r=0&o=5&pid=1.7",
-            description: "Description of movie 10"
-        },
-
-
     ];
 
     return(

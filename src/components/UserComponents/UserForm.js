@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import UserService from "../../services/UserService";
+import UserService from "../services/UserService";
 
 const UserForm = ({ onClose }) => {
   const [userName, setUserName] = useState("");
