@@ -7,7 +7,7 @@ class MoviesService {
     }
 
     getAllMovies = (pageNumber, pageSize) => {
-        return axios.get(`http://localhost:8080/getAllMovies?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+        return axios.get(`http://localhost:8080/getAllMovies`);
     }
 
     getMovieById = (id) => {
@@ -19,9 +19,12 @@ class MoviesService {
     }
 
     searchMovieByName = (movieName) => {
-        return axios.get(`http://localhost:8080/searchMovieByName`)
+        return axios.get(`http://localhost:8080/searchMovieByName?title=${movieName}`)
     }
 
+    deleteMovie = (id) => {
+        return axios.delete(`http://localhost:8080/deleteMovie/${id}`);
+    }
 }
 
 export default new MoviesService();

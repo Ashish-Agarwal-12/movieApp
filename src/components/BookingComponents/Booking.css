@@ -1,0 +1,43 @@
+
+.movie-image-section {
+    display: contents;
+}
+
+.title {
+    color: blue;
+    font-style: italic;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bolder;
+}
+
+.genre {
+    color: black;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.releaseDate {
+    color: rgb(128, 0, 43);
+    font-style: inherit;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.duration {
+    color: rgb(128, 128, 128);
+    font-weight: lighter;    
+    border-radius: 4px;
+}
+
+.description {
+    color: rgb(128, 128, 128);
+    font-weight: 500;
+    font-style: oblique;
+}
+
+.movie-description-section {
+    display: grid;
+    justify-content:center;
+    align-items: center;
+    justify-content: start;
+    align-content: space-between;
+}

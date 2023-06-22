@@ -1,12 +1,33 @@
 import React, { useEffect, useState } from "react";
 import MoviesService from "../services/MoviesService";
-import { Button, Card, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
+import { toast } from "react-toastify";
+import MovieForm from "./MovieForm";
 
 function MovieList() {
   const [movies, setMovies] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+
+  const handleChange = (movieName) => {
+    MoviesService.searchMovieByName(movieName)
+      .then((response) => {
+        setMovies(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleDelete = (id) => {
+    MoviesService.deleteMovie(id)
+      .then((response) => {
+        console.log(response);
+        toast.success("Deleted Successfully");
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
-    MoviesService.getAllMovies(0, 5)
+    MoviesService.getAllMovies()
       .then((response) => {
         setMovies(response.data);
         console.log(movies);
@@ -15,7 +36,28 @@ function MovieList() {
   }, []);
 
   return (
-    <Container fluid className="App py-3 overflow-hidden">
+    <Container fluid className="App py-3 overflow-hidden" style={{backgroundColor:"lavenderblush"}}>
+      <Row className="text-center">
+        <Col>
+          <h1>Movies List</h1>
+        </Col>
+        <Col>
+          {/* <Button type="primary" onClick={() => setModalShow(true)}>
+            Create New Movie
+          </Button>
+          <MovieForm
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          /> */}
+        </Col>
+        <Col>
+          <input
+            type="text"
+            placeholder="Search Movie"
+            onChange={(e) => handleChange(e.target.value)}
+          />
+        </Col>
+      </Row>
       <Row>
         <div
           style={{
@@ -28,19 +70,18 @@ function MovieList() {
           {movies.map((movie) => {
             return (
               <>
-                <div class="card mb-4" style={{maxWidth: "540px"}}>
-                  <div class="row g-0">
-                    <div class="col-md-4" style={{alignSelf: "center"}}>
+                <div className="card mb-4" style={{ maxWidth: "540px", backgroundColor:"bisque" }}>
+                  <div className="row g-0">
+                    <div className="col-md-4" style={{ alignSelf: "center" }}>
                       <img
                         src="https://tse4.mm.bing.net/th/id/OIP.gfJlrSjGVwWqJxWZxTLJ2QHaK5?w=196&h=288&c=7&r=0&o=5&pid=1.7"
-                        class="img-fluid rounded-start"
+                        className="img-fluid rounded-start"
                         alt="..."
-                         
                       />
                     </div>
-                    <div class="col-md-4">
-                      <div class="card-body">
-                        <h5 class="card-title">
+                    <div className="col-md-4">
+                      <div className="card-body">
+                        <h5 className="card-title">
                           {" "}
                           {movies.indexOf(movie) + 1}. {movie.title}
                         </h5>
@@ -51,13 +92,11 @@ function MovieList() {
                         <br />
                         <strong>Description :</strong>
                         <p>{movie.description}</p>
-                        
                       </div>
                     </div>
-
-                    <div class="col-md-4">
-                      <div class="card-body">
-                        <h5 class="card-title">Running on</h5>
+                    <div className="col-md-4">
+                      <div className="card-body">
+                        <h5 className="card-title">Running on</h5>
                         {movie.slots.map((slot) => {
                           return (
                             <div>
@@ -69,6 +108,21 @@ function MovieList() {
                             </div>
                           );
                         })}
+                        <div
+                          style={{ display: "inline-flex" }}
+                          className="mt-5"
+                        >
+                          <Button variant="primary">Update</Button>
+                          <Button
+                            variant="danger"
+                            className="ms-1"
+                            onClick={() => {
+                              handleDelete(movie.movieId);
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </div>
