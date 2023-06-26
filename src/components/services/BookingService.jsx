@@ -10,6 +10,10 @@ class BookingService {
         return axios.post("http://localhost:8080/addBooking", body);
     }
 
+    getBookingsByUserId = (id) => {
+        return axios.get(`http://localhost:8080/getBooking/${id}`);
+    }
+    
     cancelBooking = (id) => {
         return axios.put(`http://localhost:8080/cancelBooking/${id}`);
     }

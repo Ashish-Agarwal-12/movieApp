@@ -1,0 +1,58 @@
+.landing-page {
+  position: relative;
+  height: 100vh; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: -10px; /* Adjust the position to cover the white border */
+  left: -11px;
+  width: calc(100% + 15px); /* Adjust the width to cover the white border */
+  height: calc(100% + 15px); /* Adjust the height to cover the white border */
+  background-image: url("https://wallpapercrafter.com/desktop/272200-cinema-movies-theatre-and-theater-hd.jpg"); /* Replace with your image path */
+  background-size: cover;
+  filter: blur(5px); /* Adjust the blur intensity as needed */
+  z-index: -1; /* Move the image behind the form */
+}
+
+.login-form {
+  position: relative;
+  z-index: 1;
+  /* Additional styles for your login form */
+  /* For example: */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.login-form form {
+  width: 400px;
+  padding: 20px;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ); /* Adjust the background color and opacity as needed */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9); /* Add a shadow effect */
+  border: 3px solid black; /* Add a black border */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: whitesmoke;
+}
+
+.login-form button {
+  width: 30%;
+  padding: 10px;
+  background-color: #4caf50; /* Customize the button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+}

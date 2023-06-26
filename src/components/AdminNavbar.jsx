@@ -33,6 +33,7 @@ export default function AdminNavbar() {
           </Nav>
           <Nav>
             <LinkContainer to="/logout">
+              
               <Nav.Link>Logout</Nav.Link>
             </LinkContainer>
             {/* <LinkContainer to="/profile">

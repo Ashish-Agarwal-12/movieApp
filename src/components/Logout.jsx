@@ -18,7 +18,7 @@ export default function Logout() {
 
     //     </Container>
     // </div>
-    <Row style={{ width: "100%", height: "100%" }}>
+    <Row style={{ height: "93vh", width:"100%" }} className="bg-black">
       <Col
         style={{
           paddingLeft: "530px",

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import MoviesService from "../services/MoviesService";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
-import MovieForm from "./MovieForm";
+import { useNavigate } from "react-router-dom";
 
 function MovieList() {
   const [movies, setMovies] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (movieName) => {
     MoviesService.searchMovieByName(movieName)
@@ -26,6 +26,10 @@ function MovieList() {
       .catch((error) => console.log(error));
   };
 
+  const handleAddMovie = () => {
+    navigate("/movieForm");
+  }
+
   useEffect(() => {
     MoviesService.getAllMovies()
       .then((response) => {
@@ -33,7 +37,7 @@ function MovieList() {
         console.log(movies);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [movies]);
 
   return (
     <Container fluid className="App py-3 overflow-hidden" style={{backgroundColor:"lavenderblush"}}>
@@ -42,13 +46,10 @@ function MovieList() {
           <h1>Movies List</h1>
         </Col>
         <Col>
-          {/* <Button type="primary" onClick={() => setModalShow(true)}>
-            Create New Movie
-          </Button>
-          <MovieForm
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          /> */}
+
+        </Col>
+        <Col>
+          <Button variant="priamry" onClick={() => {handleAddMovie()}}>Add Movie</Button>
         </Col>
         <Col>
           <input

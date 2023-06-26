@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Card, Container, Form, Button, Row, Col, ToastContainer } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Card,
+  Container,
+  Form,
+  Button,
+  Row,
+  Col
+} from "react-bootstrap";
 import UserService from "./services/UserService";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
-export default function () {
+export default function SignUp () {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     userName: "",
     password: "",
@@ -17,10 +26,6 @@ export default function () {
     errors: {},
     isError: false,
   });
-
-//   useEffect(() => {
-//     console.log(data);
-//   }, [data]);
 
   const handleChange = (e, property) => {
     setData({ ...data, [property]: e.target.value });
@@ -38,33 +43,41 @@ export default function () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   try{
-    UserService.createUser(data).then((response) => {
-        console.log(response.data);
-        toast.success("Registered SuccesssFully");
-        setData({
-          userName: "",
-          password: "",
-          userType: "",
-          emailId: "",
-          mobileNumber: "",
-        });
-      }).catch((error)=> {
-          setError({
-              errors: error,
-              isError: true
+    try {
+      UserService.createUser(data)
+        .then((response) => {
+          console.log(response.data);
+          setData({
+            userName: "",
+            password: "",
+            userType: "",
+            emailId: "",
+            mobileNumber: "",
           });
-      });
-   } catch (e) {
-    toast.error(`${e}`);
-   }
+          setError({
+            errors: {},
+            isError: false,
+          });
+          navigate("/");
+          toast.success("Registered SuccesssFully");
+        })
+        .catch((error) => {
+          setError({
+            errors: error,
+            isError: true,
+          });
+        });
+    } catch (e) {
+      toast.error(`${e}`);
+    }
   };
 
   return (
-    <Container className="mt-4">
+    <div style={{width:"100%", height:"93vh"}}>
+    <Container>
       <Row className="justify-content-md-center">
-        <Col>
-          <Card className="bg-dark text-light">
+        <Col className="mt-5">
+          <Card className="text-white" style={{backgroundColor: "rgba(0,0,0,0.8)"}}>
             <Card.Header>Fill Information to Register</Card.Header>
             <Card.Body>
               <Form onSubmit={(e) => handleSubmit(e)}>
@@ -76,9 +89,13 @@ export default function () {
                     id="userName"
                     onChange={(e) => handleChange(e, "userName")}
                     value={data.userName}
-                    isInvalid= { error.errors?.response?.data?.userName ? true: false }
+                    isInvalid={
+                      error.errors?.response?.data?.userName ? true : false
+                    }
                   />
-                  <Form.Text style={{color: "red"}}>{error.errors?.response?.data?.userName}</Form.Text>
+                  <Form.Text style={{ color: "red" }}>
+                    {error.errors?.response?.data?.userName}
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label htmlFor="password">Password</Form.Label>
@@ -88,9 +105,13 @@ export default function () {
                     id="password"
                     onChange={(e) => handleChange(e, "password")}
                     value={data.password}
-                    isInvalid= { error.errors?.response?.data?.password ? true: false }
+                    isInvalid={
+                      error.errors?.response?.data?.password ? true : false
+                    }
                   />
-                  <Form.Text style={{color: "red"}}>{error.errors?.response?.data?.password}</Form.Text>
+                  <Form.Text style={{ color: "red" }}>
+                    {error.errors?.response?.data?.password}
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label htmlFor="userType">User Type</Form.Label>
@@ -100,9 +121,13 @@ export default function () {
                     placeholder="Enter Either User/Admin"
                     onChange={(e) => handleChange(e, "userType")}
                     value={data.userType}
-                    isInvalid= { error.errors?.response?.data?.userType ? true: false }
+                    isInvalid={
+                      error.errors?.response?.data?.userType ? true : false
+                    }
                   />
-                  <Form.Text style={{color: "red"}}>{error.errors?.response?.data?.userType}</Form.Text>
+                  <Form.Text style={{ color: "red" }}>
+                    {error.errors?.response?.data?.userType}
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label htmlFor="emailId">Email ID</Form.Label>
@@ -112,9 +137,13 @@ export default function () {
                     placeholder="Enter your E-mail Address"
                     onChange={(e) => handleChange(e, "emailId")}
                     value={data.emailId}
-                    isInvalid= { error.errors?.response?.data?.emailId ? true: false }
+                    isInvalid={
+                      error.errors?.response?.data?.emailId ? true : false
+                    }
                   />
-                  <Form.Text style={{color: "red"}}>{error.errors?.response?.data?.emailId}</Form.Text>
+                  <Form.Text style={{ color: "red" }}>
+                    {error.errors?.response?.data?.emailId}
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label htmlFor="mobileNumber">Mobile Number</Form.Label>
@@ -124,9 +153,13 @@ export default function () {
                     id="mobileNumber"
                     onChange={(e) => handleChange(e, "mobileNumber")}
                     value={data.mobileNumber}
-                    isInvalid= { error.errors?.response?.data?.mobileNumber ? true: false }
+                    isInvalid={
+                      error.errors?.response?.data?.mobileNumber ? true : false
+                    }
                   />
-                  <Form.Text style={{color: "red"}}>{error.errors?.response?.data?.mobileNumber}</Form.Text>
+                  <Form.Text style={{ color: "red" }}>
+                    {error.errors?.response?.data?.mobileNumber}
+                  </Form.Text>
                 </Form.Group>
 
                 <Container style={{ textAlign: "center" }} className="mb-3">
@@ -146,7 +179,13 @@ export default function () {
             </Card.Body>
           </Card>
         </Col>
+        <Col className="mt-5 ms-5"> 
+          <Card className="border-0">
+            <Card.Img src="https://cdn.dribbble.com/users/2344801/screenshots/4774578/alphatestersanimation2.gif"></Card.Img>
+          </Card>
+        </Col>
       </Row>
     </Container>
+    </div>
   );
 }

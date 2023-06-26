@@ -8,15 +8,15 @@ const NavBar = () => {
     const [userRole, setUserRole] = useState("");
 
     useEffect(() => {
-        UserService.getUserByEmailId(localStorage.getItem("userName"))
+        UserService.getUserByEmailId(localStorage.getItem("email"))
         .then((response) => {
             setUserRole(response.data.userType);
-            console.log("testing")})
+        })
         .catch((error) => console.log(error));
     },[])
 
     const handleNavBar = () => {
-        return (userRole === 'user')? <UserNavbar /> : <AdminNavbar />;
+        return (userRole === 'admin')? <AdminNavbar /> : <UserNavbar />;
     }
     return (
         <div>

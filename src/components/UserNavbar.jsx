@@ -18,9 +18,9 @@ export default function UserNavbar() {
             <LinkContainer to="/booking">
               <Nav.Link>Booking</Nav.Link>
             </LinkContainer>
-            {/* <LinkContainer to="/tickets">
-              <Nav.Link>My Tickets</Nav.Link>
-            </LinkContainer> */}
+            <LinkContainer to="/myBookings">
+              <Nav.Link>My Bookings</Nav.Link>
+            </LinkContainer>
           </Nav>
           <Nav>
             <LinkContainer to="/logout">

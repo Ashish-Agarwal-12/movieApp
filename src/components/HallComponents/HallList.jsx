@@ -30,7 +30,7 @@ export default function HallList() {
         setHalls(response.data);
       })
       .catch((error) => console.log(error));
-  }, [halls]);
+  }, []);
 
   return (
     <Container>

@@ -18,6 +18,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Logout from "./components/Logout";
 import Ticket from "./components/Ticket";
+import MyBookings from "./components/BookingComponents/MyBookings";
+import AddMovie from "./components/MoviesComponents/AddMovie";
 
 function App() {
   return (
@@ -37,7 +39,9 @@ function App() {
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/bookingList" element={<BookingList />} />
+            <Route path="/myBookings" element={<MyBookings />} />
             {/* <Route path="/tickets" element={<Ticket />} /> */}
+            <Route path="/movieForm" element={<AddMovie />} />
             <Route path="/logout" element={<Logout />} />
           </Routes>
         </Layout>

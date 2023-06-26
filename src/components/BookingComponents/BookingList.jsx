@@ -3,30 +3,15 @@ import { Container, Table } from "react-bootstrap";
 import BookingService from "../services/BookingService";
 
 export default function BookingList() {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch('http://localhost:8080/getAllBookings'); // Replace with your API endpoint URL
-      if (response.ok) {
-        const json = await response.json();
-        setData(json);
-      } else {
-        setError('Error: ' + response.status);
-      }
-    } catch (error) {
-      setError('An error occurred while fetching the data.');
-    } finally {
-      setIsLoading(false);
-    }
-    console.log(data);
-  };
+  const [bookings, setBookings] = useState([]);
+  
+  useEffect(()=> {
+    BookingService.getAllBookings()
+    .then((response) => {
+      setBookings(response.data);
+    })
+    .catch((error) => console.log(error));
+  },[])
 
   return (
     <Container>
@@ -38,12 +23,26 @@ export default function BookingList() {
             <th>Hall Name</th>
             <th>User Name</th>
             <th>Booking Date</th>
-            <th>Status</th>
             <th>Seats Booked</th>
+            <th>Booking Status</th>
           </tr>
         </thead>
         <tbody>
-          
+          {
+            bookings.map((booking) => {
+              return(
+                <tr key={booking.bookingId}>
+                  <td>{booking.bookingId}</td>
+                  <td>{booking.slot.slotId}</td>
+                  <td>{booking.slot.hall.hallName}</td>
+                  <td>{booking.user.userName}</td>
+                  <td>{booking.bookingDate}</td>
+                  <td>{booking.noOfSeats}</td>
+                  <td>{booking.status}</td>
+                </tr>
+              )
+            })
+          }
         </tbody>
       </Table>
     </Container>
